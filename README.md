@@ -1,6 +1,6 @@
 # Portfolio — AMOUSSOU-GUENOU Donald
 
-Portfolio personnel dans **un seul fichier statique**, bilingue français/anglais. Aucune dépendance, aucun build, aucune image externe : `index.html` contient l'écran d'entrée et le portfolio.
+Portfolio personnel dans **un seul fichier statique**, bilingue français/anglais. Aucune bibliothèque, aucun build : `index.html` contient l'écran d'entrée et le portfolio. Seules ressources externes : les polices Google Fonts (avec repli système si elles ne chargent pas) et `og.png`, l'image d'aperçu pour les réseaux.
 
 Adresse une fois publié : **https://lonerfy.github.io/portfolio/**
 
@@ -15,10 +15,15 @@ Les nuages sont **précalculés et intégrés au fichier** : chaque point tient 
 ## Le portfolio
 
 - Cinq sections : accueil, profil, projets, parcours, contact
-- Dix-sept projets, fiche détaillée, badge « démo en ligne » et badge « dépôt public »
-- Douze démos reliées : Duo's Terminal, LyricStage, Neon Arcade, Nekhen Duels, Archer Quest, ORBITAL, Morphogène, Snake, Parade, Cobaye, GIF Forge, Portfolio & CV Generator
+- Section projets en deux temps : une **sélection** (les projets marqués `vedette:true`), puis un bouton **Voir les N projets** qui déplie la liste complète avec des **filtres** — jeux, applications, outils, sites et expériences
+- Fiche détaillée par projet, badge « démo en ligne » et badge « dépôt public »
+- **Aperçus** : une capture de chaque démo (dossier `apercus/`, WebP 480 × 300, environ 6 Ko chacune), en noir et blanc au repos et en couleur au survol, chargée seulement quand la carte approche de l'écran
+- **Sur écran tactile**, la tuile qui passe au milieu de l'écran s'active seule, comme au survol : elle passe en noir, gigote et son aperçu reprend ses couleurs
+- Sur l'écran d'entrée, la tuile choisie et les petites plaques numérotées gigotent comme les onglets du portfolio
+- **Compteurs calculés** : le nombre de projets et de démos (écran d'entrée, accroche, légendes) se déduit du tableau `PROJETS`, rien à mettre à jour à la main
+- Lien **CV** : `cv.pdf` (français) ou `cv-en.pdf` (anglais) selon la langue du site ; le lien se masque tout seul si le fichier manque
 - Bascule **FR / EN** sur tout le contenu, langue devinée du navigateur au premier chargement
-- Adresses directes : `#projets` ouvre la section, `#projets/snake` ouvre la fiche
+- Adresses directes : `#projets` ouvre la section, `#projets/snake` ouvre la fiche (la liste complète se déplie si le projet n'est pas dans la sélection)
 - Navigation clavier : `↑` `↓` changent de section, `1` à `5` en accès direct, `Échap` ferme
 - Trois ambiances au même bouton, chacune avec son identité :
   - **clair** — blanc pur, noir pur, aucune teinte : l'ambiance d'ouverture
@@ -26,7 +31,7 @@ Les nuages sont **précalculés et intégrés au fichier** : chaque point tient 
   - **acier** — noir bleuté, métal froid, accent glacier
 - Le site s'ouvre en **mode clair**, animations actives. Le bouton **animations / sobre** permet de tout couper ; le bouton d'ambiance fait défiler clair, cuivre, acier
 - Mise en page d'impression propre : `Ctrl+P` donne un document noir sur blanc, toutes sections dépliées
-- Métadonnées de partage, favicon vectorielle intégrée
+- Métadonnées de partage avec image `og.png` (1200 × 630), favicon vectorielle intégrée
 
 ## Modifier le contenu
 
@@ -37,14 +42,14 @@ Tout est en haut du `<script>`. Chaque texte est un objet `{fr, en}`.
 | `PORTRAITS` | les nuages de points du portrait |
 | `I` | libellés d'interface, titres, accroche, menu d'entrée et ses légendes |
 | `PROJETS` | la grille et les fiches |
-| `COMPETENCES` | les six cartes du profil |
+| `COMPETENCES` | les sept cartes du profil |
 | `PARCOURS` | la chronologie |
 | `LIENS` | la section contact |
 
 Un projet se déclare ainsi :
 
 ```js
-{nom:"Snake", tag:{fr:"jeu",en:"game"},
+{nom:"Snake", vedette:true, tag:{fr:"jeu",en:"game"},
  public:true, lien:GITHUB+"/Snake",
  demo:"https://lonerfy.github.io/Snake/",
  resume:{fr:"Une phrase sur la carte.", en:"One line on the card."},
@@ -52,21 +57,19 @@ Un projet se déclare ainsi :
  pile:["TypeScript"]}
 ```
 
-`public:true` affiche le badge « dépôt public » et le bouton *Voir le code*. `demo` ajoute le badge « démo en ligne » et le bouton *Ouvrir la démo*. Les deux sont facultatifs.
+`public:true` affiche le badge « dépôt public » et le bouton *Voir le code*. `demo` ajoute le badge « démo en ligne » et le bouton *Ouvrir la démo*. `vedette:true` place le projet dans la sélection visible d'emblée. `apercu:true` affiche l'image `apercus/<nom-en-minuscules>.webp` (par exemple `apercus/la-crypte.webp`). Tous trois sont facultatifs. L'ordre du tableau est l'ordre d'affichage.
+
+Le filtre se déduit du `tag` : `jeu` → Jeux ; `application`, `web app` → Applications ; `outil`, `écriture` → Outils ; `site`, `visuel`, `expérience` → Sites et expériences.
 
 ## À compléter
 
-- **Neon Arcade**, **ORBITAL** et **Portfolio & CV Generator** : fiches encore vides, alors que les trois ont une démo en ligne
-- **Les URL de dépôt de Duo's Terminal, Parade, Cobaye et Portfolio** : elles renvoient au profil `github.com/LonerFy`, les autres pointent vers leur dépôt exact
-- **Les piles techniques** de TryWeb, LyricStage, Neon Arcade, ORBITAL, Morphogène, GNOSIS, Boudoir, Poem Atelier et Portfolio & CV Generator — TryWeb est traité comme un dépôt privé : ni badge, ni lien de code
-- **`cv.pdf`** : déposez le fichier à la racine, le bouton de la section contact pointe déjà dessus
-- **`og:image`** : une image de partage 1200 × 630 pour un aperçu illustré sur les réseaux
+- **Les piles techniques** de TryWeb, GNOSIS et Poem Atelier (dépôts privés)
 
 ## Mise en ligne
 
 ```bash
 git init
-git add index.html README.md
+git add index.html README.md og.png apercus cv.pdf cv-en.pdf
 git commit -m "portfolio"
 git branch -M main
 git remote add origin git@github.com:LonerFy/portfolio.git

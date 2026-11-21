@@ -3,15 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AMOUSSOU-GUENOU Donald — développeur, Cotonou</title>
-<meta name="description" content="Développeur à Cotonou : applications web, jeux, outils et interfaces. Licence 3 Architecture des Logiciels, ESGIS-Bénin.">
+<title>AMOUSSOU-GUENOU Donald — développeur full stack, Cotonou</title>
+<meta name="description" content="Développeur full stack à Cotonou : applications web, jeux, outils et interfaces. Licence 3 Architecture des Logiciels, ESGIS-Bénin.">
 <meta name="author" content="AMOUSSOU-GUENOU Donald">
 <meta name="color-scheme" content="dark">
 <meta property="og:type" content="website">
-<meta property="og:title" content="AMOUSSOU-GUENOU Donald — développeur, Cotonou">
+<meta property="og:title" content="AMOUSSOU-GUENOU Donald — développeur full stack, Cotonou">
 <meta property="og:description" content="Applications web, jeux, outils et interfaces. Portfolio.">
 <meta property="og:url" content="https://lonerfy.github.io/portfolio/">
+<meta property="og:image" content="https://lonerfy.github.io/portfolio/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lonerfy.github.io/portfolio/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Cpath d='M10 48 L26 14 L34 14 L50 48 L41 48 L30 24 L19 48 Z' fill='%23F4F7F9'/%3E%3Crect x='24' y='36' width='16' height='5' fill='%2379F0A8'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -148,7 +152,8 @@ body{margin:0;height:100dvh;min-height:100%;overflow:hidden;background:var(--noi
 .marque{font-family:var(--dis);font-weight:900;font-size:21px;letter-spacing:.06em;color:var(--vif);line-height:1}
 .marque span{color:var(--phos)}
 .etat{font-size:11.5px;color:var(--gris);letter-spacing:.12em}
-.outils{margin-left:auto;display:flex;gap:8px}
+.outils{margin-left:auto;display:flex;flex-wrap:wrap;gap:8px}
+@media (max-width:560px){.outils{margin-left:0;width:100%;gap:6px}.outils .mini{padding:5px 8px}}
 .mini{font-family:var(--mono);font-size:11px;color:var(--argent);letter-spacing:.1em;background:transparent;
   text-decoration:none;display:inline-flex;align-items:center;
   border:1px solid var(--ligne);padding:5px 11px;cursor:pointer;transition:color .15s,border-color .15s,background .15s}
@@ -243,6 +248,10 @@ body{margin:0;height:100dvh;min-height:100%;overflow:hidden;background:var(--noi
   border-left:2px solid var(--phos);background:linear-gradient(100deg,rgba(121,240,168,.07),transparent 72%);
   font-size:12.5px;color:var(--argent)}
 .indice span:first-child{color:var(--phos)}
+.filtres{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.filtres .mini span{opacity:.6;margin-left:6px}
+.selection{margin:0 0 14px;font-size:12px;letter-spacing:.12em;color:var(--gris)}
+.plus{display:flex;justify-content:center;margin:26px 0 8px}
 .carte:focus-visible{outline:1px solid var(--phos);outline-offset:3px}
 
 .pile{display:grid;gap:10px}
@@ -363,6 +372,7 @@ html.sobre .bandes,html.sobre .dispo i{animation:none}
 .gleg{margin:clamp(4px,1vh,14px) 0 0;min-height:2.6em;max-width:46ch;font-size:12.5px;color:var(--argent)}
 .gbas{display:flex;align-items:flex-end;gap:clamp(16px,2.4vw,34px);margin-top:clamp(6px,1.6vh,22px)}
 .gbas .compte{font-family:var(--dis);font-weight:900;font-size:clamp(22px,2.6vw,34px);line-height:1;color:var(--vif)}
+.gbas .compte b{font:inherit}
 .gbas .compte span{display:block;margin-top:3px;font-family:var(--mono);font-size:10px;font-weight:400;
   letter-spacing:.2em;color:var(--gris)}
 .gcoin{position:absolute;z-index:4;top:clamp(14px,2.4vh,26px);right:clamp(16px,3vw,34px);text-align:right;
@@ -401,6 +411,39 @@ html.sobre .bandes,html.sobre .dispo i{animation:none}
 [data-theme="clair"] .phrase{color:#000;text-shadow:none}
 [data-theme="acier"] .gitem.premier:hover{background:linear-gradient(100deg,var(--vif),var(--phos))}
 
+
+/* écrans tactiles : la tuile au centre de l'écran s'active seule, comme au survol */
+@media (hover:none){
+[data-theme="clair"] .carte.focal{background:#000;box-shadow:none}
+[data-theme="clair"] .carte.focal h3{color:#FFF}
+[data-theme="clair"] .carte.focal p{color:#9A9A9A}
+[data-theme="clair"] .carte.focal .n{-webkit-text-stroke-color:#6E6E6E}
+[data-theme="clair"] .carte.focal .tag,[data-theme="clair"] .carte.focal .ouvre{color:#FFF}
+[data-theme="clair"] .carte.focal .pastille{color:#B4B4B4;border-color:rgba(255,255,255,.3)}
+[data-theme="clair"] .carte.focal .pastille.demo{color:#FFF;border-color:rgba(255,255,255,.6)}
+[data-theme="clair"] .item.focal{background:linear-gradient(100deg,#E4E4E4,transparent 74%)}
+[data-theme="clair"] .lien.focal{background:#000;color:#FFF;border-color:#000}
+[data-theme="clair"] .lien.focal span{color:#9A9A9A}
+.carte.focal{background:linear-gradient(150deg,var(--terre),#0D0C0B 62%);transform:translateY(-3px);
+  animation:gigote .5s steps(1) infinite}
+.carte.focal .ouvre{color:var(--phos)}
+.item.focal{border-left-color:var(--phos)}
+.lien.focal{background:linear-gradient(100deg,var(--terre),transparent 80%);border-color:var(--phos);transform:translateX(5px)}
+}
+/* écran d'entrée : la tuile choisie et les petites plaques numérotées gigotent */
+.gitem.sel,.gitem.premier{animation:gigote .55s steps(1) infinite}
+.gitem .cle{animation:gigote .8s steps(1) infinite}
+.gitem:nth-child(2) .cle{animation-delay:-.2s}.gitem:nth-child(3) .cle{animation-delay:-.4s}
+.gitem:nth-child(4) .cle{animation-delay:-.6s}.gitem:nth-child(5) .cle{animation-delay:-.1s}
+
+/* aperçus : noir et blanc au repos, couleur au survol ou quand la tuile est active */
+.carte .apercu{display:block;width:calc(100% + 40px);height:auto;aspect-ratio:16/10;object-fit:cover;
+  margin:-20px -20px 14px;filter:grayscale(1) contrast(1.06);transition:filter .3s}
+.carte:hover .apercu,.carte.focal .apercu,.carte:focus-visible .apercu{filter:none}
+.carte.avec-img .tag{top:12px;right:14px;z-index:2;background:var(--noir);color:var(--vif);padding:3px 8px}
+.carte.avec-img:hover .tag,.carte.avec-img.focal .tag,[data-theme="clair"] .carte.avec-img:hover .tag,[data-theme="clair"] .carte.avec-img.focal .tag{color:var(--vif)}
+.fiche .fimg{display:block;width:100%;max-width:520px;height:auto;aspect-ratio:16/10;object-fit:cover;margin:0 0 16px}
+@media print{.carte .apercu,.fiche .fimg{display:none}}
 </style>
 </head>
 <body>
@@ -432,8 +475,8 @@ html.sobre .bandes,html.sobre .dispo i{animation:none}
     <nav class="gmenu" id="gmenu" aria-label="Entrée"></nav>
     <p class="gleg" id="gleg"></p>
     <div class="gbas">
-      <div class="compte">17<span id="gProjets"></span></div>
-      <div class="compte">12<span id="gDemos"></span></div>
+      <div class="compte"><b id="nProjets"></b><span id="gProjets"></span></div>
+      <div class="compte"><b id="nDemos"></b><span id="gDemos"></span></div>
       <div class="compte">3<span id="gAmb"></span></div>
     </div>
   </div>
@@ -493,7 +536,9 @@ html.sobre .bandes,html.sobre .dispo i{animation:none}
         <h2 class="titre" id="tTitreProjets"></h2>
         <p class="sous" id="tSousProjets"></p>
         <p class="indice" id="tIndice"></p>
+        <div id="filtresProjets"></div>
         <div class="grille" id="grilleProjets"></div>
+        <div class="plus" id="plusProjets"></div>
       </section>
 
       <section class="vue" id="v-parcours">
@@ -517,6 +562,7 @@ html.sobre .bandes,html.sobre .dispo i{animation:none}
 
 <div class="calque" id="calque" role="dialog" aria-modal="true" aria-label="Fiche projet">
   <article class="fiche" id="fiche" tabindex="-1">
+    <img class="fimg" id="fImg" alt="" width="480" height="300" decoding="async">
     <div class="tag" id="fTag"></div>
     <div class="n" id="fN"></div>
     <h2 id="fNom"></h2>
@@ -560,8 +606,8 @@ const I={
   },
   dispo:{fr:"disponible pour missions",en:"available for work"},
   pitch:{
-    fr:"Développeur à Cotonou, en Licence 3 <strong>Architecture des Logiciels</strong> à l'ESGIS-Bénin. Applications web, jeux, outils et interfaces. <strong>Dix-sept projets</strong> à voir, du portefeuille électronique au générateur de poèmes.",
-    en:"Developer based in Cotonou, third-year <strong>Software Architecture</strong> student at ESGIS-Bénin. Web applications, games, tools and interfaces. <strong>Seventeen projects</strong> to browse, from a digital wallet to a poetry generator."
+    fr:"Développeur <strong>full stack</strong> à Cotonou, en Licence 3 <strong>Architecture des Logiciels</strong> à l'ESGIS-Bénin. Applications web, jeux, outils et interfaces. <strong>{n} projets</strong> à voir, de l'application de notes Grimoire aux récits interactifs de Mythes d'encre et de La Crypte.",
+    en:"<strong>Full-stack</strong> developer based in Cotonou, third-year <strong>Software Architecture</strong> student at ESGIS-Bénin. Web applications, games, tools and interfaces. <strong>{n} projects</strong> to browse, from the Grimoire notes app to the interactive tales of Mythes d'encre and La Crypte."
   },
   cta1:{fr:"Voir les projets",en:"See the work"},
   cta2:{fr:"Me joindre",en:"Get in touch"},
@@ -572,11 +618,11 @@ const I={
     en:"Third-year <b>Software Architecture</b> student at <b>ESGIS-Bénin</b>, in Cotonou. Alongside my studies I build for clients and for myself."
   },
   profil2:{
-    fr:"Mon terrain va des applications web aux jeux, en passant par les outils de génération et les interfaces. Ce qui m'intéresse, c'est le système complet : la logique, l'outil qui la rend utilisable, et l'écran par lequel on y accède.",
-    en:"My range goes from web applications to games, by way of generative tools and interfaces. What interests me is the whole system: the logic, the tool that makes it usable, and the screen it is reached through."
+    fr:"Mon terrain va des applications web aux jeux, en passant par les outils et les interfaces. Côté serveur, je travaille sur le back-end et l'infrastructure : API, bases de données, déploiement cloud sur Azure. Ce qui m'intéresse, c'est le système complet : la logique, l'outil qui la rend utilisable, et l'écran par lequel on y accède.",
+    en:"My range goes from web applications to games, by way of tools and interfaces. On the server side I work on back end and infrastructure: APIs, databases, cloud deployment on Azure. What interests me is the whole system: the logic, the tool that makes it usable, and the screen it is reached through."
   },
   titreProjets:{fr:'Les <em>projets</em>',en:'The <em>projects</em>'},
-  sousProjets:{fr:"dix-sept pièces, cliquez pour la fiche",en:"seventeen pieces, click for details"},
+  sousProjets:{fr:"{n} pièces, cliquez pour la fiche",en:"{n} pieces, click for details"},
   titreParcours:{fr:'Le <em>parcours</em>',en:'The <em>path</em>'},
   sousParcours:{fr:"poste, stage, formation",en:"position, internship, studies"},
   titreContact:{fr:'Le <em>contact</em>',en:'<em>Contact</em>'},
@@ -588,7 +634,7 @@ const I={
   accueil:{fr:"accueil",en:"home"},
   phrase:{fr:"Approchez",en:"Step closer"},
   sousPhrase:{fr:"portfolio de AMOUSSOU-GUENOU Donald",en:"portfolio of AMOUSSOU-GUENOU Donald"},
-  gsur:{fr:"développeur · cotonou, bénin",en:"developer · cotonou, benin"},
+  gsur:{fr:"développeur full stack · cotonou, bénin",en:"full-stack developer · cotonou, benin"},
   gastuce:{fr:"cliquez le portrait pour changer de photo",en:"click the portrait to change photo"},
   glieu:{fr:"cotonou, bénin",en:"cotonou, benin"},
   gprojets:{fr:"projets",en:"projects"},
@@ -599,7 +645,7 @@ const I={
     {fr:"Parcours",en:"Path"},{fr:"Contact",en:"Contact"}],
   legs:[
     {fr:"Le portfolio complet, du premier projet au contact.",en:"The full portfolio, from first project to contact."},
-    {fr:"Dix-sept pièces : applications, jeux, outils. Douze ont une démo en ligne.",en:"Seventeen pieces: applications, games, tools. Twelve have a live demo."},
+    {fr:"{n} pièces : applications, jeux, outils. {d} ont une démo en ligne.",en:"{n} pieces: applications, games, tools. {d} have a live demo."},
     {fr:"Ce que je construis, et avec quoi.",en:"What I build, and what I build it with."},
     {fr:"Poste, stage, formation. Depuis 2024.",en:"Position, internship, studies. Since 2024."},
     {fr:"Disponible pour missions freelance et collaborations.",en:"Available for freelance work and collaborations."}],
@@ -611,6 +657,17 @@ const I={
           en:"Every card opens a detail panel: description, tech stack, link to the live demo and to the source code."},
   code:{fr:"Voir le code",en:"View the code"},
   fermer:{fr:"Fermer",en:"Close"},
+  themes:{cuivre:{fr:"cuivre",en:"copper"},acier:{fr:"acier",en:"steel"},clair:{fr:"clair",en:"light"}},
+  tTheme:{fr:"Changer d'ambiance : clair, cuivre ou acier",en:"Change theme: light, copper or steel"},
+  son:{fr:"son",en:"sound"}, muet:{fr:"muet",en:"muted"},
+  tSon:{fr:"Activer ou couper le son",en:"Turn sound on or off"},
+  anim:{fr:"animations",en:"motion"}, sobre:{fr:"sobre",en:"still"},
+  tMouv:{fr:"Activer ou couper les animations",en:"Turn animations on or off"},
+  filtres:{tous:{fr:"Tous",en:"All"},jeux:{fr:"Jeux",en:"Games"},applis:{fr:"Applications",en:"Applications"},
+           outils:{fr:"Outils",en:"Tools"},sites:{fr:"Sites et expériences",en:"Sites and experiments"}},
+  voirTout:{fr:"Voir les {n} projets",en:"See all {n} projects"},
+  reduire:{fr:"Revenir à la sélection",en:"Back to the selection"},
+  selection:{fr:"Sélection de {v} projets sur {n}.",en:"A selection of {v} projects out of {n}."},
   bas:{
     fr:'<span><kbd>↑</kbd><kbd>↓</kbd> naviguer</span><span><kbd>1</kbd>–<kbd>5</kbd> accès direct</span><span><kbd>Échap</kbd> fermer</span>',
     en:'<span><kbd>↑</kbd><kbd>↓</kbd> navigate</span><span><kbd>1</kbd>–<kbd>5</kbd> jump</span><span><kbd>Esc</kbd> close</span>'
@@ -622,85 +679,94 @@ const SECTIONS=["accueil","profil","projets","parcours","contact"];
 /* public:true  → badge « dépôt public » et bouton vers le code
    lien         → URL exacte du dépôt, à remplacer projet par projet     */
 const PROJETS=[
-  {nom:"TryWeb", tag:{fr:"application",en:"application"},   // dépôt privé : ni badge ni lien
-   resume:{fr:"Portefeuille électronique pensé pour les petites et moyennes entreprises.",
-           en:"Digital wallet built for small and medium businesses."},
-   texte:{fr:"Application de portefeuille électronique destinée aux PME : suivi des opérations et gestion des mouvements courants. Le projet en est au stade d'un premier produit, à l'échelle des structures locales.",
-          en:"Digital wallet application aimed at small and medium businesses: operation tracking and day-to-day movement management. The project is at first-product stage, sized for local structures."},
-   pile:[]},
+  {nom:"Grimoire", apercu:true, vedette:true, tag:{fr:"application",en:"application"}, public:true, lien:GITHUB+"/grimoire",
+   resume:{fr:"Application de notes liées entre elles, graphe interactif, synchronisée entre PC et téléphone.",
+           en:"Linked-notes application with an interactive graph, synced between PC and phone."},
+   texte:{fr:"Application de notes pour ordinateur et mobile. Les notes se relient par la syntaxe [[ ]] et forment un graphe interactif, global ou centré sur une note. La synchronisation PC ↔ téléphone passe par un dépôt GitHub privé, chaque note étant un fichier Markdown ; en cas de modification simultanée, les deux versions sont conservées. L'APK Android et l'installeur Windows sont produits par GitHub Actions, et un serveur MCP permet à un agent comme Claude de lire et d'écrire les notes.",
+          en:"Notes application for desktop and mobile. Notes link to each other with [[ ]] syntax and form an interactive graph, global or centred on one note. PC ↔ phone sync goes through a private GitHub repository, each note being a Markdown file; when two devices edit at once, both versions are kept. The Android APK and the Windows installer are built by GitHub Actions, and an MCP server lets an agent such as Claude read and write the notes."},
+   pile:["Tauri 2","JavaScript","Kotlin","MCP"]},
 
-  {nom:"Duo's Terminal", tag:{fr:"web app",en:"web app"}, public:true, lien:GITHUB,
-   demo:"https://duo-s-terminal.vercel.app",
-   resume:{fr:"Un terminal qui anime une soirée à deux : questions, défis chronométrés, gages.",
-           en:"A terminal that runs an evening for two: questions, timed challenges, forfeits."},
-   texte:{fr:"Application web d'un seul fichier, sans dépendance ni build. Le moteur retient qui est qui dans le duo, accorde chaque carte au bon joueur, brasse les paquets pour éviter les répétitions et enchaîne les manches. Interface en terminal monochrome, navigation entièrement au clavier, plusieurs duos enregistrables avec leur score.",
-          en:"Single-file web application, no dependencies, no build step. The engine keeps track of who is who in the pair, assigns each card to the right player, shuffles the decks to avoid repeats and chains rounds together. Monochrome terminal interface, full keyboard navigation, several pairs saved with their own scores."},
+  {nom:"La Crypte", apercu:true, vedette:true, tag:{fr:"site",en:"site"}, public:true, lien:GITHUB+"/la-crypte",
+   demo:"https://lonerfy.github.io/la-crypte/",
+   resume:{fr:"Site d'horreur immersif : cimetière interactif, huit histoires, bestiaire.",
+           en:"Immersive horror site: interactive graveyard, eight stories, bestiary."},
+   texte:{fr:"Site d'horreur conçu pour Halloween : cinématique d'entrée, cimetière interactif, transitions de sang liquide, huit histoires immersives et interactives, bestiaire et veillées du monde. Entièrement statique, sans dépendance ni build ; tous les sons sont synthétisés dans le navigateur.",
+          en:"Horror site designed for Halloween: opening cinematic, interactive graveyard, liquid blood transitions, eight immersive interactive stories, a bestiary and wakes from around the world. Fully static, no dependencies or build step; every sound is synthesised in the browser."},
+   pile:["HTML","CSS","JavaScript","Web Audio"]},
+
+  {nom:"Mythes d'encre", apercu:true, vedette:true, tag:{fr:"site",en:"site"}, public:true, lien:GITHUB+"/mythes-d-encre-v7",
+   demo:"https://lonerfy.github.io/mythes-d-encre-v7/",
+   resume:{fr:"Neuf mythes du Japon ancien racontés à l'encre blanche, à manipuler du bout du doigt.",
+           en:"Nine myths of ancient Japan told in white ink, handled with your fingertip."},
+   texte:{fr:"Récit interactif en neuf chapitres : Amaterasu dans sa grotte, le serpent à huit têtes, la princesse de bambou, le renard à neuf queues et d'autres. Chaque récit se joue : on fait glisser la roche de la grotte, on fait tourner l'épée Kusanagi, un rond d'encre suit le curseur. Ambiance sonore synthétisée dans le navigateur, un seul fichier.",
+          en:"Interactive story in nine chapters: Amaterasu in her cave, the eight-headed serpent, the bamboo princess, the nine-tailed fox and more. Each tale is played: you slide the cave's rock aside, spin the Kusanagi sword, an ink drop follows the cursor. Ambient sound synthesised in the browser, a single file."},
    pile:["HTML","CSS","JavaScript","Canvas","Web Audio"]},
 
-  {nom:"LyricStage", tag:{fr:"web app",en:"web app"}, public:true, lien:GITHUB+"/LyricStage",
+  {nom:"BookLore", apercu:true, vedette:true, tag:{fr:"application",en:"application"}, public:true, lien:GITHUB+"/booklore",
+   demo:"https://lonerfy.github.io/booklore/",
+   resume:{fr:"Bibliothèque du département IRT : livres, auteurs, rayons et prêts.",
+           en:"IRT department library: books, authors, shelves and loans."},
+   texte:{fr:"Application de gestion de la bibliothèque du département IRT, née d'un TP Laravel. La démo en ligne est un site statique : livres, auteurs, rayons et prêts sont des exemples, et ce que le visiteur ajoute reste enregistré dans son navigateur. Les couvertures viennent d'Open Library ; un livre sans photo garde une couverture en toile dessinée. L'application complète, avec base de données, tourne sous Laravel en local.",
+          en:"Management application for the IRT department library, born from a Laravel course project. The live demo is a static site: books, authors, shelves and loans are samples, and whatever the visitor adds is kept in their browser. Covers come from Open Library; a book without a photo gets a drawn cloth cover. The full application, with its database, runs on Laravel locally."},
+   pile:["Laravel","PHP","HTML","JavaScript"]},
+
+  {nom:"Fissure", apercu:true, vedette:true, tag:{fr:"site",en:"site"}, public:true, lien:GITHUB+"/Fissures",
+   demo:"https://lonerfy.github.io/Fissures/",
+   resume:{fr:"Six mythes du monde, du Vodun fon à la Grèce : chaque page se brise pour ouvrir la suivante.",
+           en:"Six world myths, from Fon Vodun to Greece: each page shatters to open the next."},
+   texte:{fr:"Le Livre des Mythes Brisés : six mythes répartis en quatre mondes (Vodun fon du Bénin, Nord scandinave, Égypte ancienne, Japon et Grèce), dix-huit chapitres. On touche l'Éclat, la page se fissure, et ses morceaux recomposent le monde suivant. Chaque mythe a sa propre brèche et ses effets.",
+          en:"The Book of Broken Myths: six myths across four worlds (Fon Vodun from Benin, the Norse North, ancient Egypt, Japan and Greece), eighteen chapters. Touch the Shard, the page cracks, and its pieces rebuild the next world. Every myth has its own breach and effects."},
+   pile:["HTML","CSS","JavaScript","Canvas"]},
+
+  {nom:"KUROSEN", apercu:true, vedette:true, tag:{fr:"visuel",en:"visual"}, public:true, lien:GITHUB+"/kurosen",
+   demo:"https://lonerfy.github.io/kurosen/",
+   resume:{fr:"Manga en relief : un one-shot interactif où les cases prennent de la profondeur.",
+           en:"Manga in relief: an interactive one-shot where panels gain depth."},
+   texte:{fr:"KUROSEN 黒線 : un one-shot de manga en français, « Le dernier trait », où chaque case se révèle en couches avec un effet de relief, de parallaxe et de réaction à l'orientation de l'appareil. Un seul fichier HTML, dessiné en CSS et SVG.",
+          en:"KUROSEN 黒線: a French-language manga one-shot, “Le dernier trait”, where each panel unfolds in layers with relief, parallax and a reaction to device orientation. A single HTML file, drawn in CSS and SVG."},
+   pile:["HTML","CSS","SVG","JavaScript"]},
+
+  {nom:"Cité Sans Alibi", apercu:true, vedette:true, tag:{fr:"jeu",en:"game"}, public:true, lien:GITHUB+"/cite-sans-alibi",
+   demo:"https://lonerfy.github.io/cite-sans-alibi/",
+   resume:{fr:"Jeu d'enquête : interroger les habitants, relier les indices, trouver le coupable avant l'aube.",
+           en:"Detective game: question the locals, connect the clues, find the culprit before dawn."},
+   texte:{fr:"Jeu d'enquête dans une ville nocturne. On se promène dans la rue, on parle aux habitants, qui détiennent chacun l'indice d'une affaire, et on remplit un carnet. Deux modes : un parcours d'affaires de difficulté croissante qui fait monter en grade, ou l'exploration libre des dossiers. Énigme d'entrée, passages noircis à révéler.",
+          en:"Detective game in a city at night. You walk down the street, talk to the locals, each holding a clue to a case, and fill in a notebook. Two modes: a run of cases of rising difficulty that earns promotions, or free exploration of the files. An entry riddle, redacted passages to reveal."},
+   pile:["HTML","CSS","JavaScript"]},
+
+  {nom:"LyricStage", apercu:true, vedette:true, tag:{fr:"web app",en:"web app"}, public:true, lien:GITHUB+"/LyricStage",
    demo:"https://lonerfy.github.io/LyricStage/",
    resume:{fr:"Paroles en direct : saisie au clavier ou à la voix, affichage scénique.",
            en:"Live lyrics: keyboard or voice input, stage display."},
-   texte:{fr:"Application de paroles en direct. Le texte arrive au clavier ou par la voix et s'affiche en grand, pensé pour être lu depuis une scène ou un écran de contrôle.",
-          en:"Live lyrics application. Text comes in by keyboard or voice and is displayed large, meant to be read from a stage or a control screen."},
-   pile:[]},
+   texte:{fr:"Application de paroles en direct. Le texte arrive au clavier ou par la voix et s'affiche en grand, pensé pour être lu depuis une scène ou un écran de contrôle. La transcription minutée s'exporte en .lrc, .srt, .txt ou .json, sans serveur ni clé d'API.",
+          en:"Live lyrics application. Text comes in by keyboard or voice and is displayed large, meant to be read from a stage or a control screen. The timed transcript exports to .lrc, .srt, .txt or .json, with no server or API key."},
+   pile:["HTML","CSS","JavaScript","Web Speech API"]},
 
-  {nom:"Neon Arcade", tag:{fr:"jeu",en:"game"}, public:true, lien:GITHUB+"/Neon-Arcade",
-   demo:"https://lonerfy.github.io/Neon-Arcade/",
-   resume:{fr:"Fiche à compléter.",en:"Description to be written."},
-   texte:{fr:"Fiche à compléter.",en:"Description to be written."},
-   pile:[]},
+  {nom:"Maison Hibari", apercu:true, tag:{fr:"site",en:"site"}, public:true, lien:GITHUB+"/maison-hibari",
+   demo:"https://lonerfy.github.io/maison-hibari/",
+   resume:{fr:"Magazine de mode interactif en hommage à Innocent, Paradise Kiss et NANA.",
+           en:"Interactive fashion magazine paying tribute to Innocent, Paradise Kiss and NANA."},
+   texte:{fr:"Numéro spécial d'un magazine de mode imaginaire, construit comme un livre qu'on feuillette au clavier. Trois chapitres consacrés à trois mangas qui ont dessiné le vêtement comme un manifeste : la gravure baroque d'Innocent, l'atelier de Paradise Kiss, le punk de NANA. Gravure réactive à la souris, typographie de magazine.",
+          en:"Special issue of an imaginary fashion magazine, built as a book you leaf through with the keyboard. Three chapters on three manga that drew clothing as a manifesto: the baroque engraving of Innocent, the studio of Paradise Kiss, the punk of NANA. Mouse-reactive engraving, magazine typography."},
+   pile:["HTML","CSS","JavaScript","Canvas"]},
 
-  {nom:"Nekhen Duels", tag:{fr:"jeu",en:"game"},
-   public:true, lien:GITHUB+"/Nekhen-duels",
-   demo:"https://lonerfy.github.io/Nekhen-duels/",
-   resume:{fr:"Exploration et duels de cartes dans un décor égyptien.",
-           en:"Exploration and card duels in an Egyptian setting."},
-   texte:{fr:"Les Duellistes de Nekhen : un jeu d'exploration où les affrontements se règlent en duels de cartes, sur un thème égyptien. Première version tenant dans un seul fichier HTML, en cours de reprise dans un autre langage.",
-          en:"The Duellists of Nekhen: an exploration game where fights are settled through card duels, on an Egyptian theme. First version held in a single HTML file, currently being rebuilt in another language."},
-   pile:["HTML","JavaScript"]},
+  {nom:"L'Âge des Ombres", apercu:true, tag:{fr:"site",en:"site"}, public:true, lien:GITHUB+"/age-des-ombres",
+   demo:"https://lonerfy.github.io/age-des-ombres/",
+   resume:{fr:"Les créatures du cinéma d'épouvante de 1920 à 1935, dans une salle obscure.",
+           en:"The creatures of horror cinema from 1920 to 1935, in a dark theatre."},
+   texte:{fr:"Site consacré aux créatures du cinéma d'épouvante muet et des premiers parlants : Nosferatu, Caligari, le Golem, Dracula, Frankenstein… Chaque carte se retourne en négatif au survol, au toucher ou au clavier. Frise des années, mode calme pour couper les effets.",
+          en:"Site devoted to the creatures of silent and early sound horror films: Nosferatu, Caligari, the Golem, Dracula, Frankenstein… Each card flips into negative on hover, touch or keyboard. A timeline of the years, and a calm mode that turns effects off."},
+   pile:["HTML","CSS","JavaScript","Canvas"]},
 
-  {nom:"Archer Quest", tag:{fr:"jeu",en:"game"},
-   public:true, lien:GITHUB+"/Archer-quest",
-   demo:"https://lonerfy.github.io/Archer-quest/",
-   resume:{fr:"Roguelite d'archer : on progresse salle par salle, arc en main.",
-           en:"Archer roguelite: room after room, bow in hand."},
-   texte:{fr:"Jeu de tir à l'arc en progression salle par salle. Première version écrite en HTML et JavaScript, en cours de reprise dans un autre langage pour aller plus loin.",
-          en:"Bow-and-arrow game progressing room by room. First version written in HTML and JavaScript, currently being rebuilt in another language to take it further."},
-   pile:["HTML","JavaScript"]},
+  {nom:"rétro-vi", apercu:true, tag:{fr:"site",en:"site"}, public:true, lien:GITHUB+"/retro-vi",
+   demo:"https://lonerfy.github.io/retro-vi/",
+   resume:{fr:"Une bibliothèque de six livres reliés, un par année du rock, avec platine et extraits.",
+           en:"A library of six bound books, one per year of rock, with a turntable and previews."},
+   texte:{fr:"Salon en cuir capitonné et bibliothèque de six livres, de 1954 à 1985. On sort un livre de l'étagère, la page se tourne, un disque se pose sur la platine et le registre des albums de l'année s'ouvre, avec des extraits de trente secondes tirés de l'API iTunes et des liens vers les albums complets.",
+          en:"A tufted-leather lounge and a library of six books, from 1954 to 1985. Pull a book off the shelf, the page turns, a record drops on the turntable and the year's album register opens, with thirty-second previews from the iTunes API and links to the full albums."},
+   pile:["HTML","CSS","JavaScript","Web Audio","API iTunes"]},
 
-  {nom:"ORBITAL", tag:{fr:"projet",en:"project"},
-   public:true, lien:GITHUB+"/ORBITAL",
-   demo:"https://lonerfy.github.io/ORBITAL/",
-   resume:{fr:"Fiche à compléter.",en:"Description to be written."},
-   texte:{fr:"Fiche à compléter.",en:"Description to be written."},
-   pile:[]},
-
-  {nom:"Morphogène", tag:{fr:"visuel",en:"visual"}, public:true, lien:GITHUB+"/Morphog-ne",
-   demo:"https://lonerfy.github.io/Morphog-ne/",
-   resume:{fr:"Atelier visuel : ondes, microcosmes et formes qui se développent selon des facteurs réglables.",
-           en:"Visual workshop: waves, microcosms and shapes growing from adjustable factors."},
-   texte:{fr:"Outil de création et de vérification visuelle. On règle des facteurs et on observe ce qui se développe : ondes, microcosmes, croissances façon organismes. Le rendu se regarde autant qu'il se paramètre.",
-          en:"A tool for creating and visually checking generated forms. You set factors and watch what develops: waves, microcosms, organism-like growth. The output is as much to look at as to tune."},
-   pile:[]},
-
-  {nom:"Snake", tag:{fr:"jeu",en:"game"}, public:true, lien:GITHUB+"/Snake",
-   demo:"https://lonerfy.github.io/Snake/",
-   resume:{fr:"Le Snake d'origine : règles classiques, score, meilleur score et vitesse croissante.",
-           en:"The original Snake: classic rules, score, high score and rising speed."},
-   texte:{fr:"Reprise du jeu Snake avec ses règles d'origine. Score courant, meilleur score conservé et progression de la vitesse au fil de la partie. Écrit en TypeScript.",
-          en:"A take on Snake with its original rules. Running score, high score kept, and speed increasing as the game goes on. Written in TypeScript."},
-   pile:["TypeScript"]},
-
-  {nom:"Parade", tag:{fr:"jeu",en:"game"}, public:true, lien:GITHUB,
-   demo:"https://parade-tan.vercel.app/",
-   resume:{fr:"Jeu de défense : bloquer les sphères avant qu'elles n'atteignent le centre.",
-           en:"Defence game: block the spheres before they reach the centre."},
-   texte:{fr:"Jeu de défense en HTML. Des sphères bleues sont tirées vers le point central, il s'agit de les bloquer avant qu'elles ne l'atteignent.",
-          en:"HTML defence game. Blue spheres are fired towards the central point; the job is to block them before they land."},
-   pile:["HTML","JavaScript"]},
-
-  {nom:"Cobaye", tag:{fr:"expérience",en:"experiment"}, public:true, lien:GITHUB,
+  {nom:"Cobaye", apercu:true, tag:{fr:"expérience",en:"experiment"}, public:true, lien:GITHUB+"/Cobaye",
    demo:"https://cobaye-zeta.vercel.app",
    resume:{fr:"Test psychologique expérimental, mené comme un protocole.",
            en:"Experimental psychological test, run like a protocol."},
@@ -708,28 +774,82 @@ const PROJETS=[
           en:"Experimental psychological test built in HTML: the visitor goes through a protocol and gets the result at the end."},
    pile:["HTML","JavaScript"]},
 
-  {nom:"GNOSIS", tag:{fr:"jeu",en:"game"},
-   resume:{fr:"Jeu d'exploration des savoirs : zones de connaissance et deck de cartes.",
-           en:"Knowledge exploration game: zones of knowledge and a card deck."},
-   texte:{fr:"Jeu d'exploration des savoirs organisé en zones de connaissance, avec un deck de cartes façon jeu de duel. Première version en cours de déploiement.",
-          en:"A knowledge exploration game organised into zones, with a duel-style card deck. First version currently being deployed."},
-   pile:[]},
+  {nom:"Parade", apercu:true, tag:{fr:"jeu",en:"game"}, public:true, lien:GITHUB+"/Parade",
+   demo:"https://parade-tan.vercel.app/",
+   resume:{fr:"Jeu de défense : bloquer les sphères avant qu'elles n'atteignent le centre.",
+           en:"Defence game: block the spheres before they reach the centre."},
+   texte:{fr:"Jeu de défense en HTML. Des sphères bleues sont tirées vers le point central, il s'agit de les bloquer avant qu'elles ne l'atteignent.",
+          en:"HTML defence game. Blue spheres are fired towards the central point; the job is to block them before they land."},
+   pile:["HTML","JavaScript"]},
 
-  {nom:"Boudoir", tag:{fr:"site",en:"site"},
+  {nom:"Boudoir", apercu:true, tag:{fr:"site",en:"site"}, public:true, lien:GITHUB+"/boudoir",
+   demo:"https://lonerfy.github.io/boudoir/",
    resume:{fr:"Boutique de mode avec composeur de tenues et suggestions d'associations.",
            en:"Fashion store with an outfit builder and pairing suggestions."},
    texte:{fr:"Site de boutique de mode. Le visiteur compose ses tenues pièce par pièce et reçoit des suggestions d'associations.",
           en:"Fashion boutique website. Visitors put outfits together piece by piece and get pairing suggestions."},
-   pile:[]},
+   pile:["HTML","CSS","JavaScript","Three.js"]},
 
-  {nom:"Poem Atelier", tag:{fr:"écriture",en:"writing"},
-   resume:{fr:"Générateur de poèmes selon des critères choisis, en français et en anglais.",
-           en:"Poem generator from chosen criteria, in French and English."},
-   texte:{fr:"Site de génération de poèmes. On renseigne des critères, le texte est produit dans la langue voulue, français ou anglais.",
-          en:"Poem generation site. You fill in criteria and the text is produced in the chosen language, French or English."},
-   pile:[]},
+  {nom:"Rogue Arena", apercu:true, tag:{fr:"jeu",en:"game"}, public:true, lien:GITHUB+"/rogue-arena",
+   demo:"https://lonerfy.github.io/rogue-arena/",
+   resume:{fr:"Survie en arène : vagues d'ennemis, gemmes, boss toutes les cinq vagues.",
+           en:"Arena survival: enemy waves, gems, a boss every five waves."},
+   texte:{fr:"Mini-jeu de survie : le guerrier attaque seul l'ennemi le plus proche, le joueur se déplace et ramasse les gemmes pour monter de niveau. Un boss toutes les cinq vagues. Jouable au clavier, à la souris ou au joystick tactile, pause et meilleur score conservé.",
+          en:"Survival mini-game: the warrior automatically strikes the nearest enemy while the player moves and picks up gems to level up. A boss every five waves. Playable with keyboard, mouse or touch joystick, with pause and a saved high score."},
+   pile:["HTML","CSS","JavaScript","Canvas"]},
 
-  {nom:"GIF Forge", tag:{fr:"outil",en:"tool"},
+  {nom:"Morphogène", apercu:true, tag:{fr:"visuel",en:"visual"}, public:true, lien:GITHUB+"/Morphog-ne",
+   demo:"https://lonerfy.github.io/Morphog-ne/",
+   resume:{fr:"Atelier visuel : ondes, microcosmes et formes qui se développent selon des facteurs réglables.",
+           en:"Visual workshop: waves, microcosms and shapes growing from adjustable factors."},
+   texte:{fr:"Outil de création et de vérification visuelle. On règle des facteurs et on observe ce qui se développe : ondes, microcosmes, croissances façon organismes. Le rendu se regarde autant qu'il se paramètre.",
+          en:"A tool for creating and visually checking generated forms. You set factors and watch what develops: waves, microcosms, organism-like growth. The output is as much to look at as to tune."},
+   pile:["TypeScript","Canvas"]},
+
+  {nom:"Neon Arcade", apercu:true, tag:{fr:"jeu",en:"game"}, public:true, lien:GITHUB+"/Neon-Arcade",
+   demo:"https://lonerfy.github.io/Neon-Arcade/",
+   resume:{fr:"Jeu d'arcade sur canvas : tir, combos, difficulté progressive, esthétique néon.",
+           en:"Canvas arcade game: shooting, combos, rising difficulty, neon look."},
+   texte:{fr:"Jeu d'arcade jouable dans le navigateur, au clavier comme au tactile. Rendu sur canvas avec effets de particules et tremblements d'écran, système de combos et multiplicateur de score, difficulté qui monte au fil de la partie. Les sons sont générés en Web Audio et le meilleur score est conservé d'une partie à l'autre. Esthétique monochrome relevée de néon rouge.",
+          en:"Browser arcade game, playable with keyboard or touch. Canvas rendering with particle effects and screen shake, a combo system and score multiplier, difficulty that climbs as the run goes on. Sounds are generated with Web Audio and the high score is kept between sessions. Monochrome look lifted by red neon."},
+   pile:["HTML","JavaScript","Canvas","Web Audio"]},
+
+  {nom:"Nekhen Duels", apercu:true, tag:{fr:"jeu",en:"game"},
+   public:true, lien:GITHUB+"/Nekhen-duels",
+   demo:"https://lonerfy.github.io/Nekhen-duels/",
+   resume:{fr:"Exploration et duels de cartes dans un décor égyptien.",
+           en:"Exploration and card duels in an Egyptian setting."},
+   texte:{fr:"Les Duellistes de Nekhen : un jeu d'exploration où les affrontements se règlent en duels de cartes, sur un thème égyptien. On traverse une cité engloutie, on parle aux gardiens et on les bat en duel pour ouvrir la Porte des Millénaires. Moteur de duel séparé de l'affichage, adversaire à trois niveaux de difficulté, sauvegarde dans le navigateur et sons générés en Web Audio. Jouable au clavier et au tactile.",
+          en:"The Duellists of Nekhen: an exploration game where fights are settled through card duels, on an Egyptian theme. You cross a sunken city, talk to its guardians and beat them in duels to open the Gate of Millennia. Duel engine kept apart from rendering, an opponent with three difficulty levels, browser save and Web Audio sounds. Playable with keyboard and touch."},
+   pile:["TypeScript","Vite","Canvas","Web Audio","GitHub Actions"]},
+
+  {nom:"Archer Quest", apercu:true, tag:{fr:"jeu",en:"game"},
+   public:true, lien:GITHUB+"/Archer-quest",
+   demo:"https://lonerfy.github.io/Archer-quest/",
+   resume:{fr:"Roguelite d'archer : on progresse salle par salle, arc en main.",
+           en:"Archer roguelite: room after room, bow in hand."},
+   texte:{fr:"Jeu de tir à l'arc en progression salle par salle. Réécrit en Python avec pygame-ce et compilé en WebAssembly pour tourner dans le navigateur. Tir automatique quand l'archer est immobile, boss à deux phases toutes les cinq salles, améliorations à choisir, nouveau biome après chaque boss, record sauvegardé.",
+          en:"Bow-and-arrow game progressing room by room. Rewritten in Python with pygame-ce and compiled to WebAssembly to run in the browser. Automatic fire while the archer stands still, a two-phase boss every five rooms, upgrades to pick, a new biome after each boss, saved high score."},
+   pile:["Python","pygame-ce","WebAssembly","pygbag"]},
+
+  {nom:"Snake", apercu:true, tag:{fr:"jeu",en:"game"}, public:true, lien:GITHUB+"/Snake",
+   demo:"https://lonerfy.github.io/Snake/",
+   resume:{fr:"Le Snake d'origine : règles classiques, score, meilleur score et vitesse croissante.",
+           en:"The original Snake: classic rules, score, high score and rising speed."},
+   texte:{fr:"Reprise du jeu Snake avec ses règles d'origine. Score courant, meilleur score conservé et progression de la vitesse au fil de la partie. Écrit en TypeScript.",
+          en:"A take on Snake with its original rules. Running score, high score kept, and speed increasing as the game goes on. Written in TypeScript."},
+   pile:["TypeScript"]},
+
+  {nom:"ORBITAL", apercu:true, tag:{fr:"site",en:"site"},
+   public:true, lien:GITHUB+"/ORBITAL",
+   demo:"https://lonerfy.github.io/ORBITAL/",
+   resume:{fr:"Un portfolio qui se parcourt comme un terminal : commandes, onglets, bilingue.",
+           en:"A portfolio you browse like a terminal: commands, tabs, bilingual."},
+   texte:{fr:"Version alternative de mon portfolio, sous la forme d'une interface en ligne de commande. Le visiteur tape des commandes pour explorer les projets et le parcours, avec historique, onglets, raccourcis clavier et thèmes. Entièrement bilingue, en un seul fichier.",
+          en:"Alternative take on my portfolio, built as a command-line interface. Visitors type commands to explore projects and background, with history, tabs, keyboard shortcuts and themes. Fully bilingual, in a single file."},
+   pile:["HTML","CSS","JavaScript"]},
+
+  {nom:"GIF Forge", apercu:true, tag:{fr:"outil",en:"tool"},
    public:true, lien:GITHUB+"/GIF-Generator",
    demo:"https://lonerfy.github.io/GIF-Generator/",
    resume:{fr:"Assembleur de GIF : vos images deviennent une animation, sans quitter le navigateur.",
@@ -738,14 +858,45 @@ const PROJETS=[
           en:"Web tool for assembling GIFs. Images are loaded and processed in the browser, nothing is sent to a server, and the animation exports directly. It started as a short Python script and became a tool anyone can use."},
    pile:["HTML","JavaScript"]},
 
-  {nom:"Portfolio & CV Generator", tag:{fr:"outil",en:"tool"},
+  {nom:"Portfolio & CV Generator", apercu:true, tag:{fr:"outil",en:"tool"},
    public:true, lien:GITHUB+"/Portfolio-CV-Generator",
    demo:"https://lonerfy.github.io/Portfolio-CV-Generator/",
-   resume:{fr:"Fiche à compléter.",en:"Description to be written."},
-   texte:{fr:"Fiche à compléter.",en:"Description to be written."},
+   resume:{fr:"Éditeur de CV avec aperçu en direct, plusieurs modèles et export PDF dans le navigateur.",
+           en:"CV editor with live preview, several templates and in-browser PDF export."},
+   texte:{fr:"Outil pour rédiger son CV et le voir se mettre en page en direct. Cinq modèles au choix, mode clair ou sombre, interface en français ou en anglais. Le PDF est généré directement dans le navigateur, sans serveur : le fichier unique embarque la bibliothèque PDF, ce qui permet de l'héberger sur GitHub Pages.",
+          en:"Tool for writing a CV and watching it lay itself out live. Five templates, light or dark mode, French or English interface. The PDF is generated right in the browser, with no server: the single file embeds the PDF library, so it can be hosted on GitHub Pages."},
+   pile:["HTML","CSS","JavaScript","PDF"]},
+
+  {nom:"Duo's Terminal", apercu:true, tag:{fr:"web app",en:"web app"}, public:true, lien:GITHUB+"/Duo-s-Terminal",
+   demo:"https://duo-s-terminal.vercel.app",
+   resume:{fr:"Un terminal qui anime une soirée à deux : questions, défis chronométrés, gages.",
+           en:"A terminal that runs an evening for two: questions, timed challenges, forfeits."},
+   texte:{fr:"Application web d'un seul fichier, sans dépendance ni build. Le moteur retient qui est qui dans le duo, accorde chaque carte au bon joueur, brasse les paquets pour éviter les répétitions et enchaîne les manches. Interface en terminal monochrome, navigation entièrement au clavier, plusieurs duos enregistrables avec leur score.",
+          en:"Single-file web application, no dependencies, no build step. The engine keeps track of who is who in the pair, assigns each card to the right player, shuffles the decks to avoid repeats and chains rounds together. Monochrome terminal interface, full keyboard navigation, several pairs saved with their own scores."},
+   pile:["HTML","CSS","JavaScript","Canvas","Web Audio"]},
+
+  {nom:"Poem Atelier", tag:{fr:"écriture",en:"writing"},
+   resume:{fr:"Générateur de poèmes selon des critères choisis, en français et en anglais.",
+           en:"Poem generator from chosen criteria, in French and English."},
+   texte:{fr:"Site de génération de poèmes. On renseigne des critères, le texte est produit dans la langue voulue, français ou anglais.",
+          en:"Poem generation site. You fill in criteria and the text is produced in the chosen language, French or English."},
    pile:[]},
 
-  {nom:"Portfolio", tag:{fr:"site",en:"site"}, public:true, lien:GITHUB,
+  {nom:"GNOSIS", tag:{fr:"jeu",en:"game"},
+   resume:{fr:"Jeu d'exploration des savoirs : zones de connaissance et deck de cartes.",
+           en:"Knowledge exploration game: zones of knowledge and a card deck."},
+   texte:{fr:"Jeu d'exploration des savoirs organisé en zones de connaissance, avec un deck de cartes façon jeu de duel. Première version en cours de déploiement.",
+          en:"A knowledge exploration game organised into zones, with a duel-style card deck. First version currently being deployed."},
+   pile:[]},
+
+  {nom:"TryWeb", tag:{fr:"application",en:"application"},   // dépôt privé : ni badge ni lien
+   resume:{fr:"Portefeuille électronique pensé pour les petites et moyennes entreprises.",
+           en:"Digital wallet built for small and medium businesses."},
+   texte:{fr:"Application de portefeuille électronique destinée aux PME : suivi des opérations et gestion des mouvements courants. Le projet en est au stade d'un premier produit, à l'échelle des structures locales.",
+          en:"Digital wallet application aimed at small and medium businesses: operation tracking and day-to-day movement management. The project is at first-product stage, sized for local structures."},
+   pile:[]},
+
+  {nom:"Portfolio", apercu:true, tag:{fr:"site",en:"site"}, public:true, lien:GITHUB+"/portfolio",
    resume:{fr:"Le site que vous lisez : menu oblique, transitions en bandes, navigation clavier.",
            en:"The site you are reading: angled menu, banded transitions, keyboard navigation."},
    texte:{fr:"Portfolio monochrome en un fichier statique. Menu en polygones qui vibrent, transitions de page en bandes obliques, grain animé, version bilingue et impression propre. Le contenu tient dans quelques tableaux en tête de script.",
@@ -763,17 +914,21 @@ const COMPETENCES=[
           en:"Game loops, canvas rendering, scoring and progression systems."},
    pile:["Canvas","TypeScript","Game design"]},
   {nom:{fr:"Back-end",en:"Back end"},
-   texte:{fr:"Logique serveur, modèles de données, authentification, intégrations de paiement et API.",
-          en:"Server logic, data models, authentication, payment integrations and APIs."},
-   pile:["PHP","Python","MySQL","API REST","WooCommerce","Git"]},
-  {nom:{fr:"Intelligence artificielle",en:"Artificial intelligence"},
-   texte:{fr:"Construction de jeux de données, apprentissage supervisé, tests de régression, export et exécution locale des modèles.",
-          en:"Dataset building, supervised fine-tuning, regression testing, model export and local execution."},
-   pile:["Python","PyTorch","CUDA","Hugging Face","LoRA / SFT","Ollama","GGUF","Google Colab"]},
+   texte:{fr:"Logique serveur, modèles de données, authentification, intégrations de paiement et API, infrastructure cloud.",
+          en:"Server logic, data models, authentication, payment integrations and APIs, cloud infrastructure."},
+   pile:["PHP","Python","MySQL","API REST","Laravel","WooCommerce","Git","Azure","Bicep"]},
+  {nom:{fr:"Mobile et bureau",en:"Mobile and desktop"},
+   texte:{fr:"Applications installables sur Android et sur ordinateur, synchronisation entre appareils, compilation automatisée.",
+          en:"Installable apps for Android and desktop, cross-device sync, automated builds."},
+   pile:["React Native","Tauri","Kotlin","Android","GitHub Actions"]},
+  {nom:{fr:"IA et automatisation",en:"AI and automation"},
+   texte:{fr:"Automatisation de tâches et de services, intégration de modèles de langage dans des applications, agents IA reliés à des outils par MCP.",
+          en:"Task and service automation, language models built into applications, AI agents wired to tools through MCP."},
+   pile:["Python","API de LLM","MCP","Automatisation"]},
   {nom:{fr:"Sécurité",en:"Security"},
-   texte:{fr:"OSINT, analyse de fraude par ingénierie sociale, modélisation de comportements.",
-          en:"OSINT, social-engineering fraud analysis, behaviour modelling."},
-   pile:["OSINT"]},
+   texte:{fr:"OSINT, sécurité des applications web, risques de la chaîne d'approvisionnement logicielle (OWASP).",
+          en:"OSINT, web application security, software supply-chain risks (OWASP)."},
+   pile:["OSINT","OWASP"]},
   {nom:{fr:"Création",en:"Creative"},
    texte:{fr:"Animation 2D et 3D, direction visuelle d'interfaces, identité typographique.",
           en:"2D and 3D animation, interface art direction, typographic identity."},
@@ -782,13 +937,13 @@ const COMPETENCES=[
 
 const PARCOURS=[
   {date:"2026", nom:"Living Softwares",
-   role:{fr:"Employé",en:"Employee"},
+   role:{fr:"Prestataire / Commercial",en:"Service Provider / Sales"},
    texte:{fr:"Société de développement web et mobile à Cotonou : conception et refonte d'interfaces, création de sites, tests, automatisation de services.",
           en:"Web and mobile development company in Cotonou: interface design and redesign, site building, testing, service automation."}},
   {date:"2026", nom:"ZedScore.AI",
    role:{fr:"Stage professionnel",en:"Professional internship"},
-   texte:{fr:"Conception front d'une plateforme béninoise de mise en relation de prestataires : démonstrateurs et tableau de bord.",
-          en:"Front-end design for a Beninese service-provider platform: demo pages and dashboard."}},
+   texte:{fr:"Au sein de l'équipe d'une plateforme béninoise de mise en relation de prestataires : diagrammes UML et documentation, refonte de sites et design d'interfaces, intégration front-end ; puis développement back-end et infrastructure cloud sur Azure (Bicep).",
+          en:"Within the team behind a Beninese service-provider platform: UML diagrams and documentation, site redesigns and interface design, front-end integration; then back-end development and Azure cloud infrastructure (Bicep)."}},
   {date:"2024 — 2026", nom:"ESGIS-Bénin",
    role:{fr:"Licence Architecture des Logiciels — présentement en troisième année",
          en:"Software Architecture degree — currently in third year"},
@@ -798,12 +953,12 @@ const PARCOURS=[
 
 const LIENS=[
   {nom:"GitHub",   sous:{fr:"github.com/LonerFy",en:"github.com/LonerFy"}, url:GITHUB},
-  {nom:{fr:"Courriel",en:"Email"}, sous:{fr:"elzer8159@gmail.com",en:"elzer8159@gmail.com"},
-   url:"mailto:elzer8159@gmail.com"},
+  {nom:{fr:"Courriel",en:"Email"}, sous:{fr:"donald.amoussouguenou.dev@gmail.com",en:"donald.amoussouguenou.dev@gmail.com"},
+   url:"mailto:donald.amoussouguenou.dev@gmail.com"},
   {nom:"LinkedIn", sous:{fr:"donald-amoussou-guenou",en:"donald-amoussou-guenou"},
    url:"https://www.linkedin.com/in/donald-amoussou-guenou-495b53416"},
-  {nom:{fr:"CV",en:"CV"}, sous:{fr:"télécharger le PDF",en:"download the PDF"}, url:"cv.pdf"},
-  {nom:{fr:"Position",en:"Location"}, sous:{fr:"Cotonou, Littoral, Bénin",en:"Cotonou, Littoral, Benin"}, url:"#"}
+  {nom:{fr:"CV",en:"CV"}, sous:{fr:"le PDF en français",en:"the PDF in English"}, url:"cv.pdf", cv:true},
+  {nom:{fr:"Position",en:"Location"}, sous:{fr:"Cotonou, Littoral, Bénin",en:"Cotonou, Littoral, Benin"}, url:"https://www.google.com/maps/place/Cotonou"}
 ];
 
 /* =========================================================
@@ -812,8 +967,11 @@ const LIENS=[
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const lent=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);
 const ech=s=>String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
-const E={i:0,son:true,anim:false,mouv:true,lg:"fr",fiche:-1};
-const t=v=>typeof v==="string"?v:(v&&v[E.lg])||"";
+const E={i:0,son:true,anim:false,mouv:true,lg:"fr",fiche:-1,tout:false,cat:"tous",cv:false};
+const NB=()=>({n:PROJETS.length,d:PROJETS.filter(p=>p.demo).length,v:PROJETS.filter(p=>p.vedette).length});
+const t=v=>{const x=typeof v==="string"?v:(v&&v[E.lg])||"";
+  if(x.indexOf("{")<0) return x; const k=NB();
+  return x.replace(/\{n\}/g,k.n).replace(/\{d\}/g,k.d).replace(/\{v\}/g,k.v)};
 const slug=s=>s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
 
 /* grain */
@@ -878,22 +1036,10 @@ function rendre(){
   $("#fCode").textContent=t(I.code);
   $("#fDemo").textContent=t(I.demo);
   $("#bAccueil").textContent=t(I.accueil);
+  majReglages();
   if(typeof rendreGarde==="function") rendreGarde();
 
-  $("#grilleProjets").innerHTML=PROJETS.map((p,i)=>`
-    <button class="carte" type="button" data-p="${i}">
-      <span class="tag">${ech(t(p.tag))}</span>
-      <span class="n">${String(i+1).padStart(2,"0")}</span>
-      <h3>${ech(p.nom)}</h3>
-      <p>${ech(t(p.resume))}</p>
-      <span class="bas-carte">
-        <span class="pastilles">
-          ${p.demo?`<span class="pastille demo">${ech(t(I.enLigne))}</span>`:""}
-          ${p.public?`<span class="pastille">${ech(t(I.depot))}</span>`:""}
-        </span>
-        <span class="ouvre">${ech(t(I.ouvre))}</span>
-      </span>
-    </button>`).join("");
+  rendreGrille();
 
   $("#compets").innerHTML=COMPETENCES.map((c,i)=>`
     <div class="carte" style="cursor:default">
@@ -909,9 +1055,10 @@ function rendre(){
       <div><h3>${ech(p.nom)}</h3><div class="role">${ech(t(p.role))}</div><p>${ech(t(p.texte))}</p></div>
     </div>`).join("");
 
-  $("#liens").innerHTML=LIENS.map(l=>{
-    const ext=l.url.startsWith("http");
-    return `<a class="lien" href="${ech(l.url)}"${ext?' target="_blank" rel="noopener"':""}>
+  $("#liens").innerHTML=LIENS.filter(l=>!l.cv||E.cv).map(l=>{
+    const url=l.cv?(E.lg==="en"?"cv-en.pdf":"cv.pdf"):l.url;
+    const ext=url.startsWith("http")||l.cv;
+    return `<a class="lien" href="${ech(url)}"${ext?' target="_blank" rel="noopener"':""}>
       <b>${ech(t(l.nom))}</b><span>${ech(t(l.sous))}</span></a>`;
   }).join("");
 
@@ -921,6 +1068,80 @@ function rendre(){
   });
   $("#etat").textContent=t(I.sections[SECTIONS[E.i]]).toLowerCase()+" — cotonou";
   if(E.fiche>=0) peuplerFiche(E.fiche);
+  observerFocal();
+}
+
+/* grille des projets : une sélection, puis tout avec filtres */
+const CATS={jeu:"jeux",application:"applis","web app":"applis",outil:"outils","écriture":"outils",
+            site:"sites",visuel:"sites","expérience":"sites",projet:"sites"};
+const cat=p=>CATS[p.tag.fr]||"sites";
+function carte(p,i){
+  return `
+    <button class="carte${p.apercu?" avec-img":""}" type="button" data-p="${i}">
+      ${p.apercu?`<img class="apercu" src="apercus/${slug(p.nom)}.webp" alt="" width="480" height="300" loading="lazy" decoding="async">`:""}
+      <span class="tag">${ech(t(p.tag))}</span>
+      <span class="n">${String(i+1).padStart(2,"0")}</span>
+      <h3>${ech(p.nom)}</h3>
+      <p>${ech(t(p.resume))}</p>
+      <span class="bas-carte">
+        <span class="pastilles">
+          ${p.demo?`<span class="pastille demo">${ech(t(I.enLigne))}</span>`:""}
+          ${p.public?`<span class="pastille">${ech(t(I.depot))}</span>`:""}
+        </span>
+        <span class="ouvre">${ech(t(I.ouvre))}</span>
+      </span>
+    </button>`;
+}
+function rendreGrille(){
+  const liste=PROJETS.map((p,i)=>[p,i]);
+  let vis, barre="";
+  if(!E.tout){
+    vis=liste.filter(([p])=>p.vedette);
+  }else{
+    const n=c=>c==="tous"?liste.length:liste.filter(([p])=>cat(p)===c).length;
+    barre=`<div class="filtres" role="group" aria-label="${ech(t(I.sections.projets))}">`+
+      ["tous","jeux","applis","outils","sites"].filter(c=>n(c)>0).map(c=>
+        `<button type="button" class="mini${E.cat===c?" actif":""}" data-f="${c}" aria-pressed="${E.cat===c}">${ech(t(I.filtres[c]))} <span>${n(c)}</span></button>`).join("")+`</div>`;
+    vis=E.cat==="tous"?liste:liste.filter(([p])=>cat(p)===E.cat);
+  }
+  $("#filtresProjets").innerHTML=E.tout?barre:`<p class="selection">${ech(t(I.selection))}</p>`;
+  $("#grilleProjets").innerHTML=vis.map(([p,i])=>carte(p,i)).join("");
+  $("#plusProjets").innerHTML=`<button class="cle${E.tout?" creuse":""}" type="button" data-tout="1">${ech(t(E.tout?I.reduire:I.voirTout))}</button>`;
+  observerFocal();
+}
+$("#v-projets").addEventListener("click",e=>{
+  const f=e.target.closest("[data-f]");
+  if(f){E.cat=f.dataset.f;rendreGrille();bip(760,.03,.012);return}
+  if(e.target.closest("[data-tout]")){
+    E.tout=!E.tout;E.cat="tous";rendreGrille();bip(560,.05,.02);
+    if(!E.tout) $("#scene").scrollTop=0;
+    else { const g=$("#filtresProjets"); if(g&&g.scrollIntoView) g.scrollIntoView({block:"start",behavior:E.mouv?"smooth":"auto"}); }
+  }
+});
+
+/* tactile : la tuile qui passe au centre de l'écran prend l'état « survolé » */
+const tactile=!!(window.matchMedia&&matchMedia("(hover: none)").matches);
+/* une seule tuile active : celle dont le centre est le plus proche du milieu de l'écran */
+let focalRaf=0;
+function majFocal(){
+  focalRaf=0;
+  const sc=$("#scene"), vue=$(".vue.ici"); if(!sc||!vue) return;
+  const r=sc.getBoundingClientRect(), mid=r.top+r.height/2;
+  let best=null, d0=Infinity;
+  vue.querySelectorAll(".carte, .lien, .item").forEach(el=>{
+    const b=el.getBoundingClientRect(); if(b.bottom<r.top||b.top>r.bottom) return;
+    const d=Math.abs(b.top+b.height/2-mid); if(d<d0){d0=d;best=el}
+  });
+  $$("#scene .focal").forEach(el=>{ if(el!==best) el.classList.remove("focal") });
+  if(best) best.classList.add("focal");
+}
+function observerFocal(){
+  if(!tactile) return;
+  if(!focalRaf) focalRaf=requestAnimationFrame(majFocal);
+}
+if(tactile){
+  $("#scene").addEventListener("scroll",observerFocal,{passive:true});
+  addEventListener("resize",observerFocal,{passive:true});
 }
 
 /* navigation */
@@ -934,13 +1155,19 @@ function aller(i,muet){
   setTimeout(()=>{
     E.i=i;
     $$(".tab").forEach((b,k)=>b.classList.toggle("ici",k===i));
+    montrerOnglet(i);
     $$(".vue").forEach(v=>v.classList.remove("ici"));
     $("#v-"+SECTIONS[i]).classList.add("ici");
     $("#scene").scrollTop=0;
     $("#etat").textContent=t(I.sections[SECTIONS[i]]).toLowerCase()+" — cotonou";
-    majHash();
+    majHash(); observerFocal();
   },E.mouv?300:0);
   setTimeout(()=>{E.anim=false},E.mouv?660:10);
+}
+/* sur mobile le menu défile à l'horizontale : on garde l'onglet actif visible */
+function montrerOnglet(i){
+  const b=$$(".tab")[i], m=$("#menu"); if(!b||!m||m.scrollWidth<=m.clientWidth) return;
+  m.scrollLeft=Math.max(0,b.offsetLeft-(m.clientWidth-b.offsetWidth)/2);
 }
 function majHash(){
   // replaceState lève une SecurityError en file:// ou dans un cadre isolé : on ignore
@@ -955,6 +1182,7 @@ const calque=$("#calque");
 function peuplerFiche(i){
   const p=PROJETS[i];
   $("#fTag").textContent=t(p.tag);
+  const im=$("#fImg"); if(p.apercu){im.src="apercus/"+slug(p.nom)+".webp";im.alt=p.nom;im.style.display=""}else{im.removeAttribute("src");im.style.display="none"}
   $("#fN").textContent=String(i+1).padStart(2,"0");
   $("#fNom").textContent=p.nom;
   $("#fTexte").textContent=t(p.texte);
@@ -988,9 +1216,7 @@ $("#bFr").addEventListener("click",()=>langue("fr"));
 $("#bEn").addEventListener("click",()=>langue("en"));
 function sonner(){
   E.son=!E.son;
-  const nom=E.son?"son":"muet";
-  $("#bSon").textContent=nom;
-  const g=$("#gSon"); if(g) g.textContent=nom;
+  majReglages();
   if(E.son) bip(720,.05,.02);
 }
 $("#bSon").addEventListener("click",sonner);
@@ -1001,8 +1227,7 @@ function theme(n){
   const nom=THEMES[iTheme];
   if(nom==="cuivre") document.documentElement.removeAttribute("data-theme");
   else document.documentElement.dataset.theme=nom;
-  $("#bTheme").textContent=nom;
-  const g=$("#gTheme"); if(g) g.textContent=nom;
+  majReglages();
 }
 const tournerTheme=()=>{theme(iTheme+1);bip(600,.04,.015)};
 $("#bTheme").addEventListener("click",tournerTheme);
@@ -1011,9 +1236,15 @@ $("#bTheme").addEventListener("click",tournerTheme);
 function mouvement(on){
   E.mouv=on;
   document.documentElement.classList.toggle("sobre",!on);
-  const nom=on?"animations":"sobre";
-  $("#bMouv").textContent=nom; $("#bMouv").classList.toggle("actif",on&&lent);
-  const g=$("#gMouv"); if(g){ g.textContent=nom; g.classList.toggle("actif",on&&lent); }
+  ["#bMouv","#gMouv"].forEach(id=>{const b=$(id); if(b) b.classList.toggle("actif",on&&lent)});
+  majReglages();
+}
+/* libellés des boutons de réglage, dans la langue courante */
+function majReglages(){
+  const L=[["#bTheme","#gTheme",t(I.themes[THEMES[iTheme]]),t(I.tTheme)],
+           ["#bSon","#gSon",t(E.son?I.son:I.muet),t(I.tSon)],
+           ["#bMouv","#gMouv",t(E.mouv?I.anim:I.sobre),t(I.tMouv)]];
+  L.forEach(([a,b,txt,tit])=>[a,b].forEach(id=>{const el=$(id); if(el){el.textContent=txt;el.title=tit}}));
 }
 $("#bMouv").addEventListener("click",()=>mouvement(!E.mouv));
 
@@ -1101,6 +1332,7 @@ function rendreGarde(){
   $("#gSur").textContent=t(I.gsur);
   $("#gAstuce").textContent=t(I.gastuce);
   $("#gLieu").textContent=t(I.glieu);
+  $("#nProjets").textContent=NB().n;$("#nDemos").textContent=NB().d;
   $("#gProjets").textContent=t(I.gprojets);
   $("#gDemos").textContent=t(I.gdemos);
   $("#gAmb").textContent=t(I.gamb);
@@ -1135,12 +1367,12 @@ function entrer(i){
     $("#garde").classList.add("partie");
     $("#appli").style.display="flex";
     E.i=cible;                                   // pose la vue sans rejouer le balayage
-    $$(".tab").forEach((b,k)=>b.classList.toggle("ici",k===cible));
+    $$(".tab").forEach((b,k)=>b.classList.toggle("ici",k===cible)); setTimeout(()=>montrerOnglet(cible),30);
     $$(".vue").forEach(v=>v.classList.remove("ici"));
     $("#v-"+SECTIONS[cible]).classList.add("ici");
     $("#scene").scrollTop=0;
     $("#etat").textContent=t(I.sections[SECTIONS[cible]]).toLowerCase()+" — cotonou";
-    majHash();
+    majHash(); setTimeout(observerFocal,60);
   },E.mouv?340:0);
 }
 function sortir(){
@@ -1184,11 +1416,11 @@ function depuisHash(){
   if(!h) return;
   const [sec,pj]=h.split("/");
   const i=SECTIONS.indexOf(sec);
-  if(i>=0){E.i=i;$$(".tab").forEach((b,k)=>b.classList.toggle("ici",k===i));
+  if(i>=0){E.i=i;$$(".tab").forEach((b,k)=>b.classList.toggle("ici",k===i));setTimeout(()=>montrerOnglet(i),30);
     $$(".vue").forEach(v=>v.classList.remove("ici"));$("#v-"+SECTIONS[i]).classList.add("ici")}
   if(pj){
     const k=PROJETS.findIndex(p=>slug(p.nom)===pj);
-    if(k>=0) ouvrirFiche(k);
+    if(k>=0){ if(!PROJETS[k].vedette){E.tout=true;rendreGrille()} ouvrirFiche(k); }
   }
 }
 
@@ -1196,6 +1428,8 @@ if(navigator.language&&navigator.language.slice(0,2)==="en") E.lg="en";
 mouvement(true);    // animations actives dès l'entrée ; le bouton permet de passer en sobre
 theme(2);           // on ouvre en mode clair
 langue(E.lg);
+/* le lien CV n'apparaît que si cv.pdf est bien publié à côté de la page */
+if(location.protocol.startsWith("http")) try{ fetch("cv.pdf",{method:"HEAD",cache:"no-store"}).then(r=>{ if(r.ok){E.cv=true;rendre()} }).catch(()=>{}); }catch(e){}
 batir(); dimToile(); if(ptx) tourner();
 
 /* une adresse directe saute la garde ; sinon on ouvre par le rideau */
