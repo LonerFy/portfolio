@@ -57,19 +57,19 @@ Un projet se déclare ainsi :
  pile:["TypeScript"]}
 ```
 
-`public:true` affiche le badge « dépôt public » et le bouton *Voir le code*. `demo` ajoute le badge « démo en ligne » et le bouton *Ouvrir la démo*. `vedette:true` place le projet dans la sélection visible d'emblée. `apercu:true` affiche l'image `apercus/<nom-en-minuscules>.webp` (par exemple `apercus/la-crypte.webp`). Tous trois sont facultatifs. L'ordre du tableau est l'ordre d'affichage.
+`public:true` affiche le badge « dépôt public » et le bouton *Voir le code*. `demo` ajoute le badge « démo en ligne » et le bouton *Ouvrir la démo*. `video:"videos/nom.mp4"` ajoute le badge « vidéo » et le bouton *Voir la vidéo*, qui ouvre un lecteur par-dessus la fiche (pour les applications et les dépôts privés, sans démo web). `vedette:true` place le projet dans la sélection visible d'emblée. `apercu:true` affiche l'image `apercus/<nom-en-minuscules>.webp` (par exemple `apercus/la-crypte.webp`). Tous sont facultatifs. L'ordre du tableau est l'ordre d'affichage.
 
 Le filtre se déduit du `tag` : `jeu` → Jeux ; `application`, `web app` → Applications ; `outil`, `écriture` → Outils ; `site`, `visuel`, `expérience` → Sites et expériences.
 
 ## À compléter
 
-- **Les piles techniques** de TryWeb, GNOSIS et Poem Atelier (dépôts privés)
+- **Les piles techniques** de TryWeb et GNOSIS (dépôts privés)
 
 ## Mise en ligne
 
 ```bash
 git init
-git add index.html README.md og.png apercus cv.pdf cv-en.pdf
+git add index.html README.md og.png apercus cv.pdf cv-en.pdf videos
 git commit -m "portfolio"
 git branch -M main
 git remote add origin git@github.com:LonerFy/portfolio.git

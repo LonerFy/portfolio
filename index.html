@@ -444,6 +444,17 @@ html.sobre .bandes,html.sobre .dispo i{animation:none}
 .carte.avec-img:hover .tag,.carte.avec-img.focal .tag,[data-theme="clair"] .carte.avec-img:hover .tag,[data-theme="clair"] .carte.avec-img.focal .tag{color:var(--vif)}
 .fiche .fimg{display:block;width:100%;max-width:520px;height:auto;aspect-ratio:16/10;object-fit:cover;margin:0 0 16px}
 @media print{.carte .apercu,.fiche .fimg{display:none}}
+
+/* lecteur vidéo */
+.ecran{position:fixed;inset:0;z-index:80;display:none;place-items:center;padding:clamp(10px,3vw,40px);background:rgba(0,0,0,.92);backdrop-filter:blur(6px)}
+.ecran.on{display:grid;animation:pousse .3s ease}
+.ecran-in{width:min(1280px,100%)}
+.ecran-haut{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;color:#EEE;
+  font-family:var(--mono,monospace);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+.ecran-haut .cle{font-size:15px;padding:8px 14px}
+.ecran .cle.creuse,[data-theme="clair"] .ecran .cle.creuse{background:transparent;color:#EEE;box-shadow:inset 0 0 0 1px #666}
+.ecran .cle.creuse:hover,[data-theme="clair"] .ecran .cle.creuse:hover{background:#EEE;color:#000;box-shadow:none}
+.ecran video{display:block;width:100%;aspect-ratio:16/9;background:#000;border:1px solid #222}
 </style>
 </head>
 <body>
@@ -570,10 +581,18 @@ html.sobre .bandes,html.sobre .dispo i{animation:none}
     <div class="puces" id="fPile"></div>
     <div class="rapide" style="margin-top:24px">
       <a class="cle" id="fDemo" href="#" target="_blank" rel="noopener"></a>
+      <button class="cle" type="button" id="fVideo"></button>
       <a class="cle creuse" id="fCode" href="#" target="_blank" rel="noopener"></a>
       <button class="cle creuse" type="button" id="fFerme"></button>
     </div>
   </article>
+</div>
+
+<div class="ecran" id="ecran" role="dialog" aria-modal="true" aria-label="Vidéo">
+  <div class="ecran-in">
+    <div class="ecran-haut"><span id="vTitre"></span><button class="cle creuse" type="button" id="vFerme"></button></div>
+    <video id="vid" controls playsinline preload="none"></video>
+  </div>
 </div>
 
 <div class="transi" id="transi" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -606,8 +625,8 @@ const I={
   },
   dispo:{fr:"disponible pour missions",en:"available for work"},
   pitch:{
-    fr:"Développeur <strong>full stack</strong> à Cotonou, en Licence 3 <strong>Architecture des Logiciels</strong> à l'ESGIS-Bénin. Applications web, jeux, outils et interfaces. <strong>{n} projets</strong> à voir, de l'application de notes Grimoire aux récits interactifs de Mythes d'encre et de La Crypte.",
-    en:"<strong>Full-stack</strong> developer based in Cotonou, third-year <strong>Software Architecture</strong> student at ESGIS-Bénin. Web applications, games, tools and interfaces. <strong>{n} projects</strong> to browse, from the Grimoire notes app to the interactive tales of Mythes d'encre and La Crypte."
+    fr:"Développeur <strong>full stack</strong> à Cotonou, en Licence 3 <strong>Architecture des Logiciels</strong> à l'ESGIS-Bénin. Applications web, jeux, outils et interfaces. <strong>{n} projets</strong> à voir, des applications Grimoire (notes liées, PC et mobile) et Effigie (garde-robe en stickers, Android) aux récits interactifs de Mythes d'encre et de La Crypte.",
+    en:"<strong>Full-stack</strong> developer based in Cotonou, third-year <strong>Software Architecture</strong> student at ESGIS-Bénin. Web applications, games, tools and interfaces. <strong>{n} projects</strong> to browse, from the Grimoire (linked notes, desktop and mobile) and Effigie (sticker wardrobe, Android) apps to the interactive tales of Mythes d'encre and La Crypte."
   },
   cta1:{fr:"Voir les projets",en:"See the work"},
   cta2:{fr:"Me joindre",en:"Get in touch"},
@@ -650,6 +669,9 @@ const I={
     {fr:"Poste, stage, formation. Depuis 2024.",en:"Position, internship, studies. Since 2024."},
     {fr:"Disponible pour missions freelance et collaborations.",en:"Available for freelance work and collaborations."}],
   depot:{fr:"dépôt public",en:"public repo"},
+  pVideo:{fr:"vidéo",en:"video"},
+  video:{fr:"Voir la vidéo",en:"Watch the video"},
+  tVideo:{fr:"Présentation vidéo",en:"Video presentation"},
   enLigne:{fr:"démo en ligne",en:"live demo"},
   demo:{fr:"Ouvrir la démo",en:"Open the demo"},
   ouvre:{fr:"ouvrir la fiche",en:"open details"},
@@ -679,12 +701,19 @@ const SECTIONS=["accueil","profil","projets","parcours","contact"];
 /* public:true  → badge « dépôt public » et bouton vers le code
    lien         → URL exacte du dépôt, à remplacer projet par projet     */
 const PROJETS=[
-  {nom:"Grimoire", apercu:true, vedette:true, tag:{fr:"application",en:"application"}, public:true, lien:GITHUB+"/grimoire",
+  {nom:"Grimoire", apercu:true, vedette:true, video:"videos/grimoire.mp4", tag:{fr:"application",en:"application"}, public:true, lien:GITHUB+"/grimoire",
    resume:{fr:"Application de notes liées entre elles, graphe interactif, synchronisée entre PC et téléphone.",
            en:"Linked-notes application with an interactive graph, synced between PC and phone."},
    texte:{fr:"Application de notes pour ordinateur et mobile. Les notes se relient par la syntaxe [[ ]] et forment un graphe interactif, global ou centré sur une note. La synchronisation PC ↔ téléphone passe par un dépôt GitHub privé, chaque note étant un fichier Markdown ; en cas de modification simultanée, les deux versions sont conservées. L'APK Android et l'installeur Windows sont produits par GitHub Actions, et un serveur MCP permet à un agent comme Claude de lire et d'écrire les notes.",
           en:"Notes application for desktop and mobile. Notes link to each other with [[ ]] syntax and form an interactive graph, global or centred on one note. PC ↔ phone sync goes through a private GitHub repository, each note being a Markdown file; when two devices edit at once, both versions are kept. The Android APK and the Windows installer are built by GitHub Actions, and an MCP server lets an agent such as Claude read and write the notes."},
    pile:["Tauri 2","JavaScript","Kotlin","MCP"]},
+
+  {nom:"Effigie", apercu:true, vedette:true, video:"videos/effigie.mp4", tag:{fr:"application",en:"application"},
+   resume:{fr:"Application Android : on photographie sa tenue du jour, elle est détourée et rangée comme un sticker.",
+           en:"Android app: photograph your outfit of the day and it is cut out and kept as a sticker."},
+   texte:{fr:"Application personnelle installable sur Android. On prend en photo la tenue du jour : l'arrière-plan est retiré automatiquement par un module natif de détourage, et la tenue devient un sticker rangé dans un calendrier (un par jour), une galerie avec étiquettes et statistiques, et un tableau de lookbook. Univers noir et monochrome. Code privé.",
+          en:"Personal app installable on Android. You photograph your outfit of the day: the background is removed automatically by a native cut-out module, and the outfit becomes a sticker kept in a calendar (one per day), a gallery with tags and statistics, and a lookbook board. Black, monochrome look. Private code."},
+   pile:["React Native","ML Kit","Android"]},
 
   {nom:"La Crypte", apercu:true, vedette:true, tag:{fr:"site",en:"site"}, public:true, lien:GITHUB+"/la-crypte",
    demo:"https://lonerfy.github.io/la-crypte/",
@@ -875,21 +904,14 @@ const PROJETS=[
           en:"Single-file web application, no dependencies, no build step. The engine keeps track of who is who in the pair, assigns each card to the right player, shuffles the decks to avoid repeats and chains rounds together. Monochrome terminal interface, full keyboard navigation, several pairs saved with their own scores."},
    pile:["HTML","CSS","JavaScript","Canvas","Web Audio"]},
 
-  {nom:"Poem Atelier", tag:{fr:"écriture",en:"writing"},
-   resume:{fr:"Générateur de poèmes selon des critères choisis, en français et en anglais.",
-           en:"Poem generator from chosen criteria, in French and English."},
-   texte:{fr:"Site de génération de poèmes. On renseigne des critères, le texte est produit dans la langue voulue, français ou anglais.",
-          en:"Poem generation site. You fill in criteria and the text is produced in the chosen language, French or English."},
-   pile:[]},
-
-  {nom:"GNOSIS", tag:{fr:"jeu",en:"game"},
+  {nom:"GNOSIS", apercu:true, video:"videos/gnosis.mp4", tag:{fr:"jeu",en:"game"},
    resume:{fr:"Jeu d'exploration des savoirs : zones de connaissance et deck de cartes.",
            en:"Knowledge exploration game: zones of knowledge and a card deck."},
    texte:{fr:"Jeu d'exploration des savoirs organisé en zones de connaissance, avec un deck de cartes façon jeu de duel. Première version en cours de déploiement.",
           en:"A knowledge exploration game organised into zones, with a duel-style card deck. First version currently being deployed."},
    pile:[]},
 
-  {nom:"TryWeb", tag:{fr:"application",en:"application"},   // dépôt privé : ni badge ni lien
+  {nom:"TryWeb", apercu:true, video:"videos/tryweb.mp4", tag:{fr:"application",en:"application"},   // dépôt privé : ni badge ni lien
    resume:{fr:"Portefeuille électronique pensé pour les petites et moyennes entreprises.",
            en:"Digital wallet built for small and medium businesses."},
    texte:{fr:"Application de portefeuille électronique destinée aux PME : suivi des opérations et gestion des mouvements courants. Le projet en est au stade d'un premier produit, à l'échelle des structures locales.",
@@ -1035,6 +1057,8 @@ function rendre(){
   $("#fFerme").textContent=t(I.fermer);
   $("#fCode").textContent=t(I.code);
   $("#fDemo").textContent=t(I.demo);
+  $("#fVideo").textContent=t(I.video);
+  $("#vFerme").textContent=t(I.fermer);
   $("#bAccueil").textContent=t(I.accueil);
   majReglages();
   if(typeof rendreGarde==="function") rendreGarde();
@@ -1086,6 +1110,7 @@ function carte(p,i){
       <span class="bas-carte">
         <span class="pastilles">
           ${p.demo?`<span class="pastille demo">${ech(t(I.enLigne))}</span>`:""}
+          ${p.video?`<span class="pastille demo">${ech(t(I.pVideo))}</span>`:""}
           ${p.public?`<span class="pastille">${ech(t(I.depot))}</span>`:""}
         </span>
         <span class="ouvre">${ech(t(I.ouvre))}</span>
@@ -1190,7 +1215,23 @@ function peuplerFiche(i){
   const c=$("#fCode"), dm=$("#fDemo");
   if(p.public&&p.lien){c.style.display="";c.href=p.lien}else{c.style.display="none"}
   if(p.demo){dm.style.display="";dm.href=p.demo}else{dm.style.display="none"}
+  $("#fVideo").style.display=p.video?"":"none";
 }
+/* lecteur vidéo : s'ouvre par-dessus la fiche */
+const ecran=$("#ecran"), vid=$("#vid");
+function ouvrirVideo(){
+  const p=PROJETS[E.fiche]; if(!p||!p.video) return;
+  $("#vTitre").textContent=p.nom+" — "+t(I.tVideo);
+  vid.poster=p.apercu?"apercus/"+slug(p.nom)+".webp":"";
+  vid.src=p.video; vid.muted=false; vid.volume=.85; ecran.classList.add("on");
+  /* avec le son si le navigateur l'autorise ; sinon (lien direct sans clic) on démarre en muet */
+  try{ const r=vid.play(); if(r&&r.catch) r.catch(()=>{ vid.muted=true; const r2=vid.play(); if(r2&&r2.catch) r2.catch(()=>{}); }); }catch(e){}
+  bip(520,.05,.02);
+}
+function fermerVideo(){ try{vid.pause()}catch(e){} vid.removeAttribute("src"); try{vid.load()}catch(e){} ecran.classList.remove("on"); }
+$("#fVideo").addEventListener("click",ouvrirVideo);
+$("#vFerme").addEventListener("click",fermerVideo);
+ecran.addEventListener("click",e=>{ if(e.target===ecran) fermerVideo(); });
 function ouvrirFiche(i){
   E.fiche=i; peuplerFiche(i);
   calque.classList.add("on");
@@ -1401,6 +1442,10 @@ addEventListener("resize",dimToile,{passive:true});
 
 /* clavier */
 addEventListener("keydown",e=>{
+  if(ecran.classList.contains("on")){
+    if(e.key==="Escape"){e.preventDefault();fermerVideo()}
+    return;
+  }
   if(calque.classList.contains("on")){
     if(e.key==="Escape"){e.preventDefault();fermerFiche()}
     return;
@@ -1410,17 +1455,18 @@ addEventListener("keydown",e=>{
   if(/^[1-5]$/.test(e.key)){e.preventDefault();aller(+e.key-1)}
 });
 
-/* ouverture sur une ancre : #projets ou #projets/snake */
+/* ouverture sur une ancre : #projets, #projets/snake ou #projets/effigie/video (lance la vidéo) */
 function depuisHash(){
   const h=decodeURIComponent(location.hash.replace(/^#/,""));
   if(!h) return;
-  const [sec,pj]=h.split("/");
+  const [sec,pj,vue]=h.split("/");
   const i=SECTIONS.indexOf(sec);
   if(i>=0){E.i=i;$$(".tab").forEach((b,k)=>b.classList.toggle("ici",k===i));setTimeout(()=>montrerOnglet(i),30);
     $$(".vue").forEach(v=>v.classList.remove("ici"));$("#v-"+SECTIONS[i]).classList.add("ici")}
   if(pj){
     const k=PROJETS.findIndex(p=>slug(p.nom)===pj);
-    if(k>=0){ if(!PROJETS[k].vedette){E.tout=true;rendreGrille()} ouvrirFiche(k); }
+    if(k>=0){ if(!PROJETS[k].vedette){E.tout=true;rendreGrille()} ouvrirFiche(k);
+      if(vue==="video"&&PROJETS[k].video) setTimeout(ouvrirVideo,400); }
   }
 }
 
